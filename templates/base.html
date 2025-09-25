@@ -1,0 +1,55 @@
+<!-- templates/base_auth.html -->
+{% csrf_token %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dream Analyzer - Authentication</title>
+    <!-- Simple, clean styling for the layout -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            background-color: #f8f9fa;
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .container {
+            width: 100%;
+            padding: 2rem;
+            max-width: 960px;
+        }
+        /* Styles for authentication forms (re-used from your other templates) */
+        .auth-container {
+            max-width: 400px; margin: 0 auto; padding: 30px;
+            border: 1px solid #ddd; border-radius: 8px; background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); text-align: center;
+        }
+        .auth-container h2 { margin-bottom: 25px; }
+        .auth-container form p { display: flex; flex-direction: column; text-align: left; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}">Home</a>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'dreams:add_dream' %}">Dream Narration</a>
+                </li>
+                <!-- Add other links as needed -->
+            </ul>
+        </div>
+    </nav>
+    <main class="container">
+        <!-- The content from your login/signup/reset templates will be injected here -->
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>

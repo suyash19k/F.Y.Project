@@ -1,0 +1,39 @@
+<!-- templates/admin/base.html -->
+
+{% extends "admin/base.html" %}
+{% load i18n static %}
+
+<!--
+This template overrides the default Django admin header.
+It replaces the "View Site" link and provides a correct logout link.
+-->
+
+{% block userlinks %}
+    {% if site_url %}
+        <!-- This link correctly points to your custom admin dashboard. -->
+        <a href="{% url 'admin:dreams_dreamnarration_dashboard' %}">✨ View Dashboard</a> /
+    {% endif %}
+
+    {% if user.is_active and user.is_staff %}
+        {% trans 'Welcome,' %}
+        <strong>{% firstof user.get_short_name user.get_username %}</strong>.
+    {% endif %}
+
+    <!-- This correctly points to the admin's password change page. -->
+    / <a href="{% url 'admin:password_change' %}">🔑 {% trans 'Change password' %}</a> /
+
+    <!-- 
+    THIS IS THE CORRECTED LINE:
+    It now uses the 'url' tag to correctly find the admin's logout URL.
+    -->
+    <a href="{% url 'admin:logout' %}">🚪 {% trans 'Log out' %}</a>
+{% endblock %}
+
+
+
+<!-- Optional but recommended: Add a custom title to the admin site header -->
+{% block branding %}
+<h1 id="site-name">
+    <a href="{% url 'admin:index' %}">Dream Analyzer Administration</a>
+</h1>
+{% endblock %}

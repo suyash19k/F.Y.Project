@@ -1,0 +1,37 @@
+# Core Web Framework
+django==5.2.3
+
+# Deployment
+gunicorn==21.2.0
+
+# REST APIs (for future expansion if needed)
+djangorestframework==3.15.2
+
+# User Authentication Extensions (optional but useful)
+django-allauth==0.63.3
+
+# Database - SQLite is default (no extra install needed)
+# If you ever switch to PostgreSQL, uncomment this:
+# psycopg2-binary==2.9.9
+
+# Machine Learning / NLP
+scikit-learn==1.5.1
+nltk==3.9.1
+pandas==2.2.2
+numpy==1.26.4
+
+# Data Visualization
+matplotlib==3.9.2
+seaborn==0.13.2
+plotly==5.24.0
+
+# Audio/Voice Processing (if analyzing spoken dreams later)
+soundfile==0.12.1
+librosa==0.10.2.post1
+
+# Utility
+requests==2.32.3
+python-dotenv==1.0.1
+
+openai-whisper==20231117
+ffmpeg-python==0.2.0  # Whisper often needs ffmpeg for audio format conversion

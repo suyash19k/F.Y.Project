@@ -1,0 +1,92 @@
+<!-- templates/accounts/auth_form.html -->
+
+<!-- THE EXTENDS TAG MUST BE THE VERY FIRST LINE -->
+{% extends "base_auth.html" %} 
+
+{% block content %}
+<style>
+    .auth-container {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 30px;
+        background: #1e1e1e;
+        border-radius: 12px;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.7);
+        text-align: center;
+    }
+    .auth-container h2 {
+        margin-bottom: 20px;
+        color: #ffffff;
+    }
+    .auth-container form p {
+        margin-bottom: 15px;
+        text-align: left;
+    }
+    .auth-container form label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 6px;
+        color: #bbbbbb;
+    }
+    .auth-container form input {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 10px;
+        border: 1px solid #333;
+        border-radius: 6px;
+        background: #2a2a2a;
+        color: #ffffff;
+    }
+    .auth-container button {
+        width: 100%;
+        padding: 12px;
+        background: #4a90e2;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+    .auth-links {
+        margin-top: 20px;
+        font-size: 14px;
+        color: #cccccc;
+    }
+    .auth-links a {
+        color: #4a90e2;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    .messages {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 15px;
+        color: #ff6b6b;
+    }
+</style>
+
+<div class="auth-container">
+    <h2>{% if 'login' in request.path %}Log In{% else %}Sign Up{% endif %}</h2>
+    {% if form.errors %}
+        <ul class="messages">
+            {% for field, error_list in form.errors.items %}
+                {% for error in error_list %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">{% if 'login' in request.path %}Log In{% else %}Sign Up{% endif %}</button>
+    </form>
+    <div class="auth-links">
+        {% if 'login' in request.path %}
+            <p><a href="{% url 'accounts:password_reset' %}">Forgot Password?</a></p>
+            <p>Don’t have an account? <a href="{% url 'accounts:signup' %}">Sign up here</a>.</p>
+        {% else %}
+            <p>Already have an account? <a href="{% url 'accounts:login' %}">Log in here</a>.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
